@@ -20,7 +20,8 @@ type Node = {
 
 type GraphNodeProps = {
     data: Node,
-    selected: boolean
+    selected: boolean,
+    isConnectable: boolean
 };
 
 const PORT_TYPE_COLORS = {
@@ -32,7 +33,7 @@ const PORT_TYPE_COLORS = {
 
 const PORT_SPACING = 15;
 
-function NodeElement ({data, selected, ...props}: GraphNodeProps) {
+function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps) {
     const leftHandles = useMemo(() => {
         let arr = [];
         if (data.ports.in) {
@@ -57,6 +58,7 @@ function NodeElement ({data, selected, ...props}: GraphNodeProps) {
             }}
             title={item.name}
             data-label={item.__keyname}
+            isConnectable={isConnectable}
         />)
     }, [data.ports.in]);
 
@@ -84,6 +86,9 @@ function NodeElement ({data, selected, ...props}: GraphNodeProps) {
             }}
             title={item.name}
             data-label={item.__keyname}
+            isConnectable={isConnectable}
+            // isValidConnection={(connection) => }
+            onConnect={(params) => console.log('handle onConnect', params)}
         />)
     }, [data.ports.out]);
 

@@ -17,6 +17,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    font-family: monospace;
 }
 
 .react-flow__handle.react-flow__handle-right::before {
@@ -27,4 +28,5 @@
     position: absolute;
     top: 0;
     right: 0;
+    font-family: monospace;
 }
