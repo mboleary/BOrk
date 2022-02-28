@@ -30,3 +30,18 @@
     right: 0;
     font-family: monospace;
 }
+
+.react-flow__node .inputContainer {
+    margin-left: 20px;
+    margin-right: 20px;
+    pointer-events: none;
+}
+
+.react-flow__node .inputContainer > input {
+    width: 100%;
+    pointer-events: auto;
+}
+
+.react-flow__node .inputContainer > button {
+    pointer-events: auto;
+}

@@ -2,7 +2,7 @@
  * Given a libjame node, this visualizes it on the graph as a custom node
  */
 
-import React, {useState, useEffect, useMemo} from "react";
+import React, {useState, useEffect, useMemo, useCallback} from "react";
 
 import { Handle, Position } from "react-flow-renderer";
 
@@ -60,7 +60,7 @@ function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps)
             data-label={item.__keyname}
             isConnectable={isConnectable}
         />)
-    }, [data.ports.in]);
+    }, [data.ports.in, isConnectable]);
 
     const rightHandles = useMemo(() => {
         let arr = [];
@@ -90,11 +90,12 @@ function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps)
             // isValidConnection={(connection) => }
             onConnect={(params) => console.log('handle onConnect', params)}
         />)
-    }, [data.ports.out]);
+    }, [data.ports.out, isConnectable]);
 
     const name = data.constructor.name;
+    const mode = leftHandles.length === 0 && rightHandles.length > 0 ? "input" : leftHandles.length > 0 && rightHandles.length === 0 ? "output" : "default";
 
-    return <div className={`react-flow__node-default selectable ${selected ? "selected" : ""}`} style={{ minHeight: PORT_SPACING * Math.max(leftHandles.length, rightHandles.length)}}>
+    return <div className={`react-flow__node-${mode} selectable ${selected ? "selected" : ""}`} style={{ minHeight: PORT_SPACING * Math.max(leftHandles.length, rightHandles.length)}}>
         {leftHandles}
         <div>
             <b>{name}</b>

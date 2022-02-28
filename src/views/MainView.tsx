@@ -9,15 +9,17 @@ import ReactFlow, {Background, Controls, MiniMap } from "react-flow-renderer";
 // import nodeTypes from "../data/nodeTypes";
 
 import NodeElement from "../components/graphnodes/NodeElement";
+import InputNode from "../components/graphnodes/InputNode";
 
-import {AudioPlayerNode, AudioOutputNode} from "libjame/src/nodes";
+import {AudioPlayerNode, AudioOutputNode, FilterNode} from "libjame/src/nodes";
 
 import {initAudio, resumeAudio} from "libjame/src/Audio";
 
 import "../style/reactFlow.css";
 
 const nodeTypes = {
-    Node: NodeElement
+    Node: NodeElement,
+    Input: InputNode
 };
 
 initAudio();
@@ -32,19 +34,29 @@ function MainView({ ...props }) {
             sourceURL: "/static/test.wav"
         });
         const aon = new AudioOutputNode();
+        const fn = new FilterNode({filter: 440});
         setElements([
             {
                 id: '1',
-                type: 'input', // input node
-                data: { label: 'Input Node' },
+                type: 'Input', // input node
+                data: { 
+                    type: "range",
+                    min: 0,
+                    max: 100,
+                    title: "Test"
+                },
                 position: { x: 250, y: 25 },
             },
-            // default node
             {
                 id: '2',
-                // you can also pass a React component as a label
-                data: { label: <div>Default Node</div> },
-                position: { x: 100, y: 125 },
+                type: 'Input', // input node
+                data: { 
+                    type: "button",
+                    min: 0,
+                    max: 100,
+                    title: "Test"
+                },
+                position: { x: 250, y: 25 },
             },
             {
                 id: '3',
@@ -62,7 +74,13 @@ function MainView({ ...props }) {
                 id: '5',
                 type: 'Node',
                 data: aon,
-                position: {x: 300, y: 300}
+                position: {x: 300, y: 400}
+            },
+            {
+                id: '6',
+                type: 'Node',
+                data: fn,
+                position: {x: 350, y: 300}
             },
             // animated edge
             { id: 'e1-2', source: '1', target: '2', animated: true },
