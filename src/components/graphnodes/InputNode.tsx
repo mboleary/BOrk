@@ -10,6 +10,8 @@ import Port, {PORT_TYPES, PORT_DIRECTIONS, buildPortObj} from "libjame/src/Port"
 
 import { INPUT_TYPES } from "../../internalNodes/InputNode";
 
+import {canConnect} from "../../state/helpers/node.helper";
+
 import "../../style/reactFlow.css";
 
 // export enum INPUT_TYPES {
@@ -99,8 +101,8 @@ function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphN
             title={item.name}
             data-label={item.__keyname}
             isConnectable={isConnectable}
-            // isValidConnection={(connection) => }
-            onConnect={(params) => console.log('handle onConnect', params)}
+            isValidConnection={(connection) => canConnect(connection)}
+            // onConnect={(params) => console.log('handle onConnect', params)}
         />)
     }, [ports.out, isConnectable]);
 
@@ -122,7 +124,7 @@ function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphN
                     <label>
                         {data.name}
                     </label>
-                    <input type={data.type}  name={id} onChange={handleInputChange} />
+                    <input type={data.type} min={data.min} name={id} onChange={handleInputChange} />
                 </>
             }
             

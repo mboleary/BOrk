@@ -18,6 +18,11 @@ interface EdgePayload {
     targetPort: string
 };
 
+interface NodePayload {
+    node: any,
+    position: any
+}
+
 interface ReduxAction<T> {
     type: string,
     payload: T
@@ -33,7 +38,7 @@ export const nodeSlice = createSlice({
     name: 'nodes',
     initialState,
     reducers: {
-        addNode: (state, action) => {
+        addNode: (state, action: ReduxAction<NodePayload>) => {
             const node = action.payload.node;
             const position = action.payload.position;
             // Add node to libjame nodes
@@ -134,3 +139,4 @@ export const nodeSlice = createSlice({
 });
 
 export default nodeSlice.reducer;
+export const {addNode, addEdge, removeNode, removeEdge} = nodeSlice.actions;

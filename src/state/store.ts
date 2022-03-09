@@ -8,8 +8,6 @@ import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import nodeReducer from "./slices/nodes";
 
-const initialState = {};
-
 // @TODO implement Undo stack via middleware
 
 // const middlewareEnhancer = applyMiddleware(thunkMiddleware);

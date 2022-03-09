@@ -8,6 +8,8 @@ import { Handle, Position } from "react-flow-renderer";
 
 import {PORT_TYPES} from "libjame/src/Port";
 
+import {canConnect} from "../../state/helpers/node.helper";
+
 type PortObject = {
     in: any,
     out: any
@@ -87,8 +89,8 @@ function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps)
             title={item.name}
             data-label={item.__keyname}
             isConnectable={isConnectable}
-            // isValidConnection={(connection) => }
-            onConnect={(params) => console.log('handle onConnect', params)}
+            isValidConnection={(connection) => canConnect(connection)}
+            // onConnect={(params) => console.log('handle onConnect', params)}
         />)
     }, [data.ports.out, isConnectable]);
 

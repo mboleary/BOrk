@@ -13,6 +13,7 @@ export enum INPUT_TYPES {
 };
 
 type BorkInputNodeParams = {
+    id?: any,
     type: INPUT_TYPES,
     min?: number,
     max?: number,
