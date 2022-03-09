@@ -48,7 +48,7 @@ function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps)
         }
         return arr.map((item, index) => <Handle 
             key={item.id}
-            id={item.id}
+            id={item.__keyname}
             type="target"
             position={Position.Left}
             style={{
@@ -76,7 +76,7 @@ function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps)
         }
         return arr.map((item, index) => <Handle 
             key={item.id}
-            id={item.id}
+            id={item.__keyname}
             type="source"
             position={Position.Right}
             style={{

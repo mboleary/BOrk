@@ -8,25 +8,32 @@ import { Handle, Position } from "react-flow-renderer";
 
 import Port, {PORT_TYPES, PORT_DIRECTIONS, buildPortObj} from "libjame/src/Port";
 
+import { INPUT_TYPES } from "../../internalNodes/InputNode";
+
 import "../../style/reactFlow.css";
 
-export enum INPUT_TYPES {
-    BUTTON = "button",
-    CHECKBOX = "checkbox",
-    NUMBER = "number",
-    SLIDER = "range"
-}
+// export enum INPUT_TYPES {
+//     BUTTON = "button",
+//     CHECKBOX = "checkbox",
+//     NUMBER = "number",
+//     SLIDER = "range"
+// }
 
-type PortInstance = {
+// type PortInstance = {
 
+// };
+
+type PortObject = {
+    out: any
 };
 
 type InputNodeData = {
     type: INPUT_TYPES,
     min?: number,
     max?: number,
-    title: string
-}
+    name: string,
+    ports: PortObject
+};
 
 // type PortObject = {
 //     in: any,
@@ -54,18 +61,19 @@ const PORT_TYPE_COLORS = {
 
 const PORT_SPACING = 15;
 
-function NodeElement ({data, selected, isConnectable, id, ...props}: GraphNodeProps) {
-    const ports = useMemo(() => {
-        let intPorts: Array<PortInstance> = [];
+function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphNodeProps) {
+    // const ports = useMemo(() => {
+    //     let intPorts: Array<PortInstance> = [];
 
-        if (data.type === INPUT_TYPES.BUTTON) {
-            intPorts.push(new Port("trigger", null, PORT_TYPES.TRIGGER, null, null, PORT_DIRECTIONS.OUT, "Trigger from button"));
-        } else {
-            intPorts.push(new Port("value", null, PORT_TYPES.PARAM, null, null, PORT_DIRECTIONS.OUT, "Input Value"));
-        }
+    //     if (data.type === INPUT_TYPES.BUTTON) {
+    //         intPorts.push(new Port("trigger", null, PORT_TYPES.TRIGGER, null, null, PORT_DIRECTIONS.OUT, "Trigger from button"));
+    //     } else {
+    //         intPorts.push(new Port("value", null, PORT_TYPES.PARAM, null, null, PORT_DIRECTIONS.OUT, "Input Value"));
+    //     }
 
-        return buildPortObj(intPorts);
-    }, []);
+    //     return buildPortObj(intPorts);
+    // }, []);
+    const ports = data.ports;
     const rightHandles = useMemo(() => {
         let arr = [];
         if (ports.out) {
@@ -80,7 +88,7 @@ function NodeElement ({data, selected, isConnectable, id, ...props}: GraphNodePr
         }
         return arr.map((item, index) => <Handle 
             key={item.id}
-            id={item.id}
+            id={item.__keyname}
             type="source"
             position={Position.Right}
             style={{
@@ -110,11 +118,11 @@ function NodeElement ({data, selected, isConnectable, id, ...props}: GraphNodePr
     return <div className={`react-flow__node-${mode} selectable ${selected ? "selected" : ""}`}>
         <div className="inputContainer">
             {
-                data.type === INPUT_TYPES.BUTTON ? <button type="button" onClick={handleButtonClick}>{data.title}</button> : <>
+                data.type === INPUT_TYPES.BUTTON ? <button type="button" onClick={handleButtonClick}>{data.name}</button> : <>
                     <label>
-                        {data.title}
+                        {data.name}
                     </label>
-                    <input {...data} name={id} onChange={handleInputChange} />
+                    <input type={data.type}  name={id} onChange={handleInputChange} />
                 </>
             }
             
@@ -123,4 +131,4 @@ function NodeElement ({data, selected, isConnectable, id, ...props}: GraphNodePr
     </div>
 }
 
-export default NodeElement;
+export default InputNodeElement;

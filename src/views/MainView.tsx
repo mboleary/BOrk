@@ -15,6 +15,8 @@ import {AudioPlayerNode, AudioOutputNode, FilterNode} from "libjame/src/nodes";
 
 import {initAudio, resumeAudio} from "libjame/src/Audio";
 
+import BorkInputNode, {INPUT_TYPES} from "../internalNodes/InputNode";
+
 import "../style/reactFlow.css";
 
 const nodeTypes = {
@@ -35,27 +37,29 @@ function MainView({ ...props }) {
         });
         const aon = new AudioOutputNode();
         const fn = new FilterNode({filter: 440});
+        const bin1 = new BorkInputNode({
+            type: INPUT_TYPES.SLIDER,
+            min: 0,
+            max: 100,
+            name: "Test"
+        });
+        const bin2 = new BorkInputNode({
+            type: INPUT_TYPES.BUTTON,
+            min: 0,
+            max: 100,
+            name: "Test"
+        });
         setElements([
             {
                 id: '1',
                 type: 'Input', // input node
-                data: { 
-                    type: "range",
-                    min: 0,
-                    max: 100,
-                    title: "Test"
-                },
+                data: bin1,
                 position: { x: 250, y: 25 },
             },
             {
                 id: '2',
                 type: 'Input', // input node
-                data: { 
-                    type: "button",
-                    min: 0,
-                    max: 100,
-                    title: "Test"
-                },
+                data: bin2,
                 position: { x: 250, y: 25 },
             },
             {
