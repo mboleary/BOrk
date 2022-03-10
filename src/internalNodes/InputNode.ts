@@ -38,5 +38,7 @@ export default class BorkInputNode extends Node {
         this.min = params.min || null;
         this.max = params.max || null;
         this.name = params.name || "";
+
+        this.__isInputNode = true;
     }
 }

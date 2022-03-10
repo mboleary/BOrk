@@ -45,7 +45,7 @@ export const nodeSlice = createSlice({
             state.nodes.push(node);
 
             // Add graphNode for displaying in the UI
-            if (node.constructor.name === "BorkInputNode") {
+            if (node.__isInputNode) {
                 state.graphElements.push({
                     id: node.id,
                     type: "Input",
