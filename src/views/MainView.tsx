@@ -55,15 +55,15 @@ function MainView({ ...props }) {
             id: nanoid(),
             type: INPUT_TYPES.SLIDER,
             min: 0,
-            max: 100,
-            name: "Test"
+            max: 1000,
+            name: "Frequency"
         });
         const bin2 = new BorkInputNode({
             id: nanoid(),
             type: INPUT_TYPES.BUTTON,
             min: 0,
             max: 100,
-            name: "Test"
+            name: "Start"
         });
         dispatch(addNode({
             node: apn,

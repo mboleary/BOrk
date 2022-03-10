@@ -124,7 +124,7 @@ function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphN
                     <label>
                         {data.name}
                     </label>
-                    <input type={data.type} min={data.min} name={id} onChange={handleInputChange} />
+                    <input type={data.type} min={data.min} max={data.max} name={id} onChange={handleInputChange} />
                 </>
             }
             
