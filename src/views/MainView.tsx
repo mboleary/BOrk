@@ -55,7 +55,7 @@ function MainView({ ...props }) {
             id: nanoid(),
             type: INPUT_TYPES.SLIDER,
             min: 0,
-            max: 1000,
+            max: 22050,
             name: "Frequency"
         });
         const bin2 = new BorkInputNode({
