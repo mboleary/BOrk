@@ -131,6 +131,7 @@ function MainView({ ...props }) {
     const elements = useSelector(state => state.nodes.graphEdges.concat(state.nodes.graphElements));
 
     const handleConnect = (params: Connection | Edge<any>) => {
+        console.log({handleConnect: params});
         if (params.source && params.sourceHandle && params.target && params.targetHandle) {
             dispatch(addEdge({
                 source: params.source,

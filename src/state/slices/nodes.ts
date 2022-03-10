@@ -65,6 +65,8 @@ export const nodeSlice = createSlice({
         addEdge: (state, action: ReduxAction<EdgePayload>) => {
             // find libjame node to attach edge to
 
+            console.log({action});
+
             let sourceNode = null, destNode = null;
             let sourcePort = null, destPort = null;
 
@@ -85,19 +87,24 @@ export const nodeSlice = createSlice({
 
             if (destNode) {
                 // Look for input port (the signal target)
-                if (sourceNode.ports.in[action.payload.targetPort]) {
-                    destPort = sourceNode.ports.in[action.payload.targetPort];
+                if (destNode.ports.in[action.payload.targetPort]) {
+                    destPort = destNode.ports.in[action.payload.targetPort];
                 }
             }
 
-            if (sourcePort && destPort) {
+            console.log("AddEdge:", sourceNode, sourcePort, destNode, destPort);
 
+            if (sourcePort && destPort) {
+                sourcePort.connect(destPort);
+                console.log("Connected SourcePort:", sourcePort);
             }
 
             state.graphEdges.push({
-                id: `e${action.payload.source}-${action.payload.target}`,
+                id: `edge_${action.payload.source}_${action.payload.sourcePort}-${action.payload.target}_${action.payload.targetPort}`,
                 source: action.payload.source,
+                sourceHandle: action.payload.sourcePort,
                 target: action.payload.target,
+                targetHandle: action.payload.targetPort,
                 animated: false
             });
         },
