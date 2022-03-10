@@ -42,13 +42,16 @@ function MainView({ ...props }) {
         resumeAudio();
         const apn = new AudioPlayerNode({
             id: nanoid(),
+            name: "AudioPlayerNode",
             sourceURL: "/static/test.wav"
         });
         const aon = new AudioOutputNode({
             id: nanoid(),
+            name: "AudioOutputNode"
         });
         const fn = new FilterNode({
             id: nanoid(),
+            name: "FilterNode",
             filter: 440
         });
         const bin1 = new BorkInputNode({
