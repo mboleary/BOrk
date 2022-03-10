@@ -1,9 +1,15 @@
 #!/bin/bash
 
-cd ../build
+cd ..
+
+cd deploy
+
+git pull
+
+cp -a -R ../build/* .
 
 git add .
 
 git commit -m "Update $(date --rfc-3339 seconds)"
 
-git push origin master --force
+git push origin main
