@@ -2,6 +2,10 @@
 
 - https://mui.com/
 
+## Audio Nodes
+
+- https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
+
 ## React Flow (Graph Library)
 - https://reactflow.dev/docs/getting-started/
 

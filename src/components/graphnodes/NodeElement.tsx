@@ -17,7 +17,8 @@ type PortObject = {
 
 type Node = {
     ports: PortObject,
-    name: string
+    name: string,
+    _type: string
 };
 
 type GraphNodeProps = {
@@ -94,7 +95,7 @@ function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps)
         />)
     }, [data.ports.out, isConnectable]);
 
-    const name = data.constructor.name;
+    const name = data._type;
     const mode = leftHandles.length === 0 && rightHandles.length > 0 ? "input" : leftHandles.length > 0 && rightHandles.length === 0 ? "output" : "default";
 
     return <div className={`react-flow__node-${mode} selectable ${selected ? "selected" : ""}`} style={{ minHeight: PORT_SPACING * Math.max(leftHandles.length, rightHandles.length)}}>

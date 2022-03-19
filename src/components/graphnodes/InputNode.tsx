@@ -31,10 +31,10 @@ type PortObject = {
 
 type InputNodeData = {
     type: INPUT_TYPES,
-    min?: number,
-    max?: number,
+    params: any,
     name: string,
-    ports: PortObject
+    ports: PortObject,
+    _type: string
 };
 
 // type PortObject = {
@@ -64,17 +64,6 @@ const PORT_TYPE_COLORS = {
 const PORT_SPACING = 15;
 
 function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphNodeProps) {
-    // const ports = useMemo(() => {
-    //     let intPorts: Array<PortInstance> = [];
-
-    //     if (data.type === INPUT_TYPES.BUTTON) {
-    //         intPorts.push(new Port("trigger", null, PORT_TYPES.TRIGGER, null, null, PORT_DIRECTIONS.OUT, "Trigger from button"));
-    //     } else {
-    //         intPorts.push(new Port("value", null, PORT_TYPES.PARAM, null, null, PORT_DIRECTIONS.OUT, "Input Value"));
-    //     }
-
-    //     return buildPortObj(intPorts);
-    // }, []);
     const ports = data.ports;
     const rightHandles = useMemo(() => {
         let arr = [];
@@ -102,7 +91,6 @@ function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphN
             data-label={item.__keyname}
             isConnectable={isConnectable}
             isValidConnection={(connection) => canConnect(connection)}
-            // onConnect={(params) => console.log('handle onConnect', params)}
         />)
     }, [ports.out, isConnectable]);
 
@@ -120,11 +108,11 @@ function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphN
     return <div className={`react-flow__node-${mode} selectable ${selected ? "selected" : ""}`}>
         <div className="inputContainer">
             {
-                data.type === INPUT_TYPES.BUTTON ? <button type="button" onClick={handleButtonClick}>{data.name}</button> : <>
+                data.params.type === INPUT_TYPES.BUTTON ? <button type="button" onClick={handleButtonClick}>{data.name}</button> : <>
                     <label>
                         {data.name}
                     </label>
-                    <input type={data.type} min={data.min} max={data.max} name={id} onChange={handleInputChange} />
+                    <input type={data.params.type || INPUT_TYPES.NUMBER} min={data.params.min} max={data.params.max} name={id} onChange={handleInputChange} />
                 </>
             }
             
