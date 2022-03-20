@@ -2,7 +2,7 @@
  * Contains functions to help with connecting nodes
  */
 
-import store from "../store";
+import { environment } from "../slices/nodes";
 
 import type {Connection} from "react-flow-renderer";
 
@@ -14,13 +14,27 @@ import type {Connection} from "react-flow-renderer";
 // };
 
 export function canConnect(connection: Connection) {
-    const state = store.getState();
-
-    console.log({state});
-
     // Find source and target ports
 
-    let sourcePort = null, targetPort = null;
+    const sourceNode = environment.getNodeByID(connection.source);
+    const targetNode = environment.getNodeByID(connection.target);
 
-    return true;
+    let sourcePort = null;
+    let targetPort = null;
+
+    if (connection.sourceHandle && sourceNode && sourceNode.ports.out[connection.sourceHandle]) {
+        sourcePort = sourceNode.ports.out[connection.sourceHandle];
+    }
+
+    if (connection.targetHandle && targetNode && targetNode.ports.in[connection.targetHandle]) {
+        targetPort = targetNode.ports.in[connection.targetHandle];
+    }
+
+    console.log({sourceNode, targetNode, sourcePort, targetPort});
+
+    if (sourcePort && targetPort) {
+        return sourcePort.type === targetPort.type;
+    }
+
+    return false;
 }
