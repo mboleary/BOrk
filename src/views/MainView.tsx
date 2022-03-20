@@ -68,26 +68,11 @@ function MainView({ ...props }) {
             max: 100,
             name: "Start"
         });
-        dispatch(addNode({
-            node: apn,
-            position: {x: 0, y: 0}
-        }));
-        dispatch(addNode({
-            node: aon,
-            position: {x: 50, y: 0}
-        }));
-        dispatch(addNode({
-            node: fn,
-            position: {x: 100, y: 0}
-        }));
-        dispatch(addNode({
-            node: bin1,
-            position: {x: 150, y: 0}
-        }));
-        dispatch(addNode({
-            node: bin2,
-            position: {x: 200, y: 0}
-        }));
+        dispatch(addNode(apn, {x: 0, y: 0}, "Node"));
+        dispatch(addNode(aon, {x: 50, y: 0}, "Node"));
+        dispatch(addNode(fn, {x: 100, y: 0}, "Node"));
+        dispatch(addNode(bin1, {x: 150, y: 0}, "Input"));
+        dispatch(addNode(bin2, {x: 200, y: 0}, "Input"));
         // setElements([
         //     {
         //         id: '1',

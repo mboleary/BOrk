@@ -10,6 +10,10 @@ import {PORT_TYPES} from "libjame/src/Port";
 
 import {canConnect} from "../../state/helpers/node.helper";
 
+import {environment} from "../../state/slices/nodes";
+
+console.log("EXPORTED ENVIRONMENT INSTANCE:", environment);
+
 type PortObject = {
     in: any,
     out: any
@@ -22,6 +26,7 @@ type Node = {
 };
 
 type GraphNodeProps = {
+    id: string,
     data: Node,
     selected: boolean,
     isConnectable: boolean
@@ -36,7 +41,10 @@ const PORT_TYPE_COLORS = {
 
 const PORT_SPACING = 15;
 
-function NodeElement ({data, selected, isConnectable, ...props}: GraphNodeProps) {
+function NodeElement ({id, selected, isConnectable, ...props}: GraphNodeProps) {
+    const data = useMemo(() => {
+        return environment.getNodeByID(id);
+    }, [id])
     const leftHandles = useMemo(() => {
         let arr = [];
         if (data.ports.in) {

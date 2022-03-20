@@ -12,6 +12,8 @@ import { INPUT_TYPES } from "../../internalNodes/InputNode";
 
 import {canConnect} from "../../state/helpers/node.helper";
 
+import { environment } from "../../state/slices/nodes";
+
 import "../../style/reactFlow.css";
 
 // export enum INPUT_TYPES {
@@ -63,7 +65,10 @@ const PORT_TYPE_COLORS = {
 
 const PORT_SPACING = 15;
 
-function InputNodeElement ({data, selected, isConnectable, id, ...props}: GraphNodeProps) {
+function InputNodeElement ({selected, isConnectable, id, ...props}: GraphNodeProps) {
+    const data = useMemo(() => {
+        return environment.getNodeByID(id);
+    }, [id])
     const ports = data.ports;
     const rightHandles = useMemo(() => {
         let arr = [];
