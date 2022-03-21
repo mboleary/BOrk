@@ -16,17 +16,6 @@ import { environment } from "../../state/slices/nodes";
 
 import "../../style/reactFlow.css";
 
-// export enum INPUT_TYPES {
-//     BUTTON = "button",
-//     CHECKBOX = "checkbox",
-//     NUMBER = "number",
-//     SLIDER = "range"
-// }
-
-// type PortInstance = {
-
-// };
-
 type PortObject = {
     out: any
 };
@@ -38,16 +27,6 @@ type InputNodeData = {
     ports: PortObject,
     _type: string
 };
-
-// type PortObject = {
-//     in: any,
-//     out: any
-// }
-
-// type Node = {
-//     ports: PortObject,
-//     name: string
-// };
 
 type GraphNodeProps = {
     data: InputNodeData,

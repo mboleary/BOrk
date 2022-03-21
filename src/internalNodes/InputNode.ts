@@ -3,7 +3,7 @@
  */
 
 import Node from "libjame/src/Node";
-import Port, {PORT_TYPES, PORT_DIRECTIONS, buildPortObj} from "libjame/src/Port";
+import {PORT_TYPES, PORT_DIRECTIONS} from "libjame/src/Port";
 
 export enum INPUT_TYPES {
     BUTTON = "button",
@@ -27,7 +27,6 @@ export default class BorkInputNode extends Node {
         // let ports = [];
 
         if (params.type === "button") {
-            // ports.push(new Port("trigger", null, PORT_TYPES.TRIGGER, null, null, PORT_DIRECTIONS.OUT, "Trigger from button"));
             this._addPort({
                 id: "trigger",
                 type: PORT_TYPES.TRIGGER,
@@ -35,7 +34,6 @@ export default class BorkInputNode extends Node {
                 name: "Trigger from button"
             });
         } else {
-            // ports.push(new Port("value", null, PORT_TYPES.PARAM, null, null, PORT_DIRECTIONS.OUT, "Input Value"));
             this._addPort({
                 id: "value",
                 type: PORT_TYPES.PARAM,
@@ -43,9 +41,5 @@ export default class BorkInputNode extends Node {
                 name: "Input Value"
             });
         }
-
-        // this.ports = buildPortObj(ports, this.id);
-
-        this.__isInputNode = true;
     }
 }

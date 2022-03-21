@@ -19,6 +19,9 @@ import {initAudio, resumeAudio} from "libjame/src/Audio";
 
 import BorkInputNode, {INPUT_TYPES} from "../internalNodes/InputNode";
 
+import AnalyserNode from "../internalNodes/AnalyserNode";
+import AnalyserNodeElement from "../components/graphnodes/AnalyserNodeElement";
+
 import {addNode, addEdge, removeNode, removeEdge} from "../state/slices/nodes";
 
 import { nanoid } from "nanoid";
@@ -27,7 +30,8 @@ import "../style/reactFlow.css";
 
 const nodeTypes = {
     Node: NodeElement,
-    Input: InputNode
+    Input: InputNode,
+    Analyser: AnalyserNodeElement
 };
 
 initAudio();
@@ -68,11 +72,16 @@ function MainView({ ...props }) {
             max: 100,
             name: "Start"
         });
+        const an = new AnalyserNode({
+            id: nanoid(),
+            name: "Analyser"
+        });
         dispatch(addNode(apn, {x: 0, y: 0}, "Node"));
         dispatch(addNode(aon, {x: 50, y: 0}, "Node"));
         dispatch(addNode(fn, {x: 100, y: 0}, "Node"));
         dispatch(addNode(bin1, {x: 150, y: 0}, "Input"));
         dispatch(addNode(bin2, {x: 200, y: 0}, "Input"));
+        dispatch(addNode(an, {x: 250, y: 0}, "Analyser"));
         // setElements([
         //     {
         //         id: '1',
