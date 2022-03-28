@@ -17,9 +17,9 @@ type AnalyserNodeParams = {
 export default class AnalyserNode extends Node {
     constructor(params: AnalyserNodeParams) {
         const defaults = {
-            fill: "rgb(200, 200, 200)",
-            lineWidth: 2,
-            stroke: "rgb(0, 0, 0)"
+            fill: "#eee",
+            lineWidth: 1,
+            stroke: "blue"
         };
         super(params, defaults);
 

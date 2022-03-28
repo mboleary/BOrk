@@ -8,6 +8,10 @@
 
 ## React Flow (Graph Library)
 - https://reactflow.dev/docs/getting-started/
+- https://reactflow.dev/docs/examples/edges/
+    - Can color node using `style:{stroke: 'color'}`
+- https://reactflow.dev/docs/examples/edge-with-button/
+    - Adding an edge with a button requires the user of a foreignObject
 
 ## Redux
 
